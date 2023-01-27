@@ -92,7 +92,12 @@
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.erb/mocks/fileMock.js",
-      "\\.(css|less|sass|scss)$": "identity-obj-proxy"
+      "\\.(css|less|sass|scss)$": "identity-obj-proxy",
+      "@Styles/(.*)$": "<rootDir>/src/renderer/styles/$1",
+      "@Components/(.*)$": "<rootDir>/src/renderer/components/$1",
+      "@Assets/(.*)$": "<rootDir>/assets/$1",
+      "@Pages/(.*)$": "<rootDir>/src/renderer/pages/$1",
+      "@Internals/(.*)$": "<rootDir>/src/renderer/internals/$1"
     },
     "setupFiles": [
       "./.erb/scripts/check-build-exists.ts"
@@ -163,7 +168,6 @@
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.1",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^28.1.3",
     "jest-environment-jsdom": "^28.1.3",
     "lint-staged": "^13.0.3",
     "mini-css-extract-plugin": "^2.6.1",
