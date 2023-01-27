@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 
 export type Channels = string;
