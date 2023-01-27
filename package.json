@@ -78,6 +78,7 @@
     ]
   },
   "jest": {
+    "runner": "@kayahr/jest-electron-runner",
     "moduleDirectories": [
       "node_modules",
       "release/app/node_modules",
@@ -92,41 +93,43 @@
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.erb/mocks/fileMock.js",
-      "\\.(css|less|sass|scss)$": "identity-obj-proxy",
-      "@Styles/(.*)$": "<rootDir>/src/renderer/styles/$1",
-      "@Components/(.*)$": "<rootDir>/src/renderer/components/$1",
-      "@Assets/(.*)$": "<rootDir>/assets/$1",
-      "@Pages/(.*)$": "<rootDir>/src/renderer/pages/$1",
-      "@Internals/(.*)$": "<rootDir>/src/renderer/internals/$1"
+      "\\.(css|less|sass|scss)$": "identity-obj-proxy"
     },
     "setupFiles": [
       "./.erb/scripts/check-build-exists.ts"
     ],
-    "testEnvironment": "jsdom",
+    "testEnvironment": "@kayahr/jest-electron-runner/environment",
     "testEnvironmentOptions": {
-      "url": "http://localhost/"
+      "url": "http://localhost/",
+      "electron": {
+        "options": [
+            "no-sandbox",
+            "ignore-certificate-errors",
+            "force-device-scale-factor=1"
+        ],
+        "disableHardwareAcceleration": false
+    }
     },
     "testPathIgnorePatterns": [
-      "release/app/dist",
-      ".erb/dll"
+      "release/app/dist"
     ],
     "transform": {
       "\\.(ts|tsx|js|jsx)$": "ts-jest"
     }
   },
   "dependencies": {
-    "child_process": "^1.0.2",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.8",
     "electron-updater": "^5.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.0",
-    "systeminformation": "^5.17.3"
+    "systeminformation": "^5.17.4"
   },
   "devDependencies": {
     "@electron/notarize": "^1.2.3",
     "@electron/rebuild": "^3.2.10",
+    "@kayahr/jest-electron-runner": "^29.3.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "@svgr/webpack": "^6.3.1",
     "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
@@ -169,6 +172,7 @@
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.1",
     "identity-obj-proxy": "^3.0.0",
+    "jest": "^28.1.3",
     "jest-environment-jsdom": "^28.1.3",
     "lint-staged": "^13.0.3",
     "mini-css-extract-plugin": "^2.6.1",
