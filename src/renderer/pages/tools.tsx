@@ -2,17 +2,21 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/button-has-type */
 import styles from '@Styles/Tools.module.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { PluginInterface } from '@Internals/index';
 import PluginComponent from '@Components/PluginComponent';
 
 export default function Tools() {
-  const [plugins, setPlugins] = useState([{}]);
+  const [plugins, setPlugins] = useState<Array<PluginInterface>>([{}]);
 
   useEffect(() => {
     window.electron.ipcRenderer.sendMessage('Internals-GetPlugins', []);
-    window.electron.ipcRenderer.on('Internals-SetPlugins', (args) => {
-      setPlugins(args);
-    });
+    window.electron.ipcRenderer.on(
+      'Internals-SetPlugins',
+      (args: Array<PluginInterface>) => {
+        setPlugins(args);
+      }
+    );
   }, []);
 
   return (
