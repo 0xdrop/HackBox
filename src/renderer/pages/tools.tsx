@@ -11,12 +11,9 @@ export default function Tools() {
 
   useEffect(() => {
     window.electron.ipcRenderer.sendMessage('Internals-GetPlugins', []);
-    window.electron.ipcRenderer.on(
-      'Internals-SetPlugins',
-      (args: Array<PluginInterface>) => {
-        setPlugins(args);
-      }
-    );
+    window.electron.ipcRenderer.on('Internals-SetPlugins', (args) => {
+      setPlugins(JSON.parse(args));
+    });
   }, []);
 
   return (

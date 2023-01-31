@@ -29,7 +29,7 @@ export interface InternalsInterface {
 const Internals: InternalsInterface = {
   async getVersion(plugin) {
     // Spawn process and checks for version
-    const result = plugin.version_func(plugin);
+    const result = await plugin.version_func(plugin);
     plugin.version = result;
     return plugin;
   },
@@ -55,7 +55,8 @@ electron.ipcMain.on('Internals-GetPlugins', async (event) => {
       return Internals.getVersion(element.default);
     })
   );
-  return event.reply('Internals-SetPlugins', versions);
+  console.log('INTERNALS', versions);
+  event.reply('Internals-SetPlugins', JSON.stringify(versions));
 });
 
 export default Internals;
