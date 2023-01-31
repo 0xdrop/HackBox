@@ -42,7 +42,8 @@
 }
 
 .hidden_menu {
-  display: flex;
+  /* May switch between flex or none */
+  display: none;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   background: #161b22;

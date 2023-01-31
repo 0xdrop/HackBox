@@ -19,7 +19,7 @@
       "@Components/*": ["renderer/components/*"],
       "@Assets/*": ["../assets/*"],
       "@Pages/*": ["renderer/pages/*"],
-      "@Internals/*": ["renderer/internals/*"]
+      "@Internals/*": ["internals/*"]
     }
   },
   "exclude": ["test", "release/build", "release/app/dist", ".erb/dll"]

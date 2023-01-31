@@ -98,7 +98,7 @@
       "@Components/(.*)$": ["renderer/components/$1"],
       "@Assets/(.*)$": ["../assets/$1"],
       "@Pages/(.*)$": ["renderer/pages/$1"],
-      "@Internals/(.*)$": ["renderer/internals/$1"]
+      "@Internals/(.*)$": ["internals/$1"]
     },
     "setupFiles": [
       "./.erb/scripts/check-build-exists.ts"

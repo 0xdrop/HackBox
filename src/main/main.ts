@@ -13,6 +13,7 @@ import { app, BrowserWindow, shell, ipcMain, nativeTheme } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import systeminformation from 'systeminformation';
+import InternalsManager from '../internals/index';
 import { resolveHtmlPath } from './util';
 
 class AppUpdater {
@@ -51,9 +52,9 @@ if (process.env.NODE_ENV === 'production') {
 const isDebug =
   process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
 
-if (isDebug) {
-  require('electron-debug')();
-}
+// if (isDebug) {
+//   require('electron-debug')();
+// }
 
 const installExtensions = async () => {
   const installer = require('electron-devtools-installer');
@@ -69,9 +70,9 @@ const installExtensions = async () => {
 };
 
 const createWindow = async () => {
-  if (isDebug) {
-    await installExtensions();
-  }
+  // if (isDebug) {
+  //   await installExtensions();
+  // }
 
   const RESOURCES_PATH = app.isPackaged
     ? path.join(process.resourcesPath, 'assets')
@@ -82,7 +83,7 @@ const createWindow = async () => {
   };
 
   mainWindow = new BrowserWindow({
-    show: false,
+    show: true,
     width: 1024,
     height: 728,
     icon: getAssetPath('icon.png'),
@@ -139,6 +140,8 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
+
+InternalsManager.listPlugins();
 
 app
   .whenReady()
