@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
 import electron, { IpcMainEvent } from 'electron';
@@ -36,9 +37,7 @@ const Internals: InternalsInterface = {
 
   async listPlugins() {
     const files = fs.readdirSync('src/internals/plugins/');
-    return files.map((el) => {
-      return require(`./plugins/${el}`);
-    });
+    return files.map((el) => require(`./plugins/${el}`));
   },
 
   declareEvent(event, callback) {
@@ -51,11 +50,8 @@ const Internals: InternalsInterface = {
 electron.ipcMain.on('Internals-GetPlugins', async (event) => {
   const plugins = await Internals.listPlugins();
   const versions = await Promise.all(
-    await plugins.map((element) => {
-      return Internals.getVersion(element.default);
-    })
+    await plugins.map((element) => Internals.getVersion(element.default))
   );
-  console.log('INTERNALS', versions);
   event.reply('Internals-SetPlugins', JSON.stringify(versions));
 });
 

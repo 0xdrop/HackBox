@@ -52,12 +52,12 @@
 }
 
 .container_card h1 {
-  font-family: 'Sofia Sans','Open Sans' ,Courier, monospace;
+  font-family: 'Sofia Sans', 'Open Sans', Courier, monospace;
   font-size: 80px;
 }
 
 .container_card p {
-  font-family: 'Sofia Sans','Open Sans' ,Courier, monospace;
+  font-family: 'Sofia Sans', 'Open Sans', Courier, monospace;
 }
 
 .divider {
@@ -94,7 +94,7 @@
 }
 
 .menu_option :hover {
-  background-color: #10141a ;
+  background-color: #10141a;
 }
 
 .main {
@@ -373,4 +373,3 @@
     transform: rotate(0deg);
   }
 }
-

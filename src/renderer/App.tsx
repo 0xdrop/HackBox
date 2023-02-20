@@ -46,9 +46,7 @@ export default function Home() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/tools" element={<Tools />} />
-            <Route path="/settings">
-              <></>
-            </Route>
+            <Route path="/settings" />
           </Routes>
         </div>
       </main>

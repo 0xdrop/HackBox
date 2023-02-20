@@ -5,7 +5,7 @@ import styles from '@Styles/Tools.module.css';
 import { useRef } from 'react';
 import { PluginInterface } from '@Internals/index';
 
-const PluginComponent = (props: { plugin: PluginInterface }) => {
+function PluginComponent(props: { plugin: PluginInterface }) {
   const { plugin } = props;
 
   const elementRef = useRef<HTMLSpanElement | any>();
@@ -25,32 +25,33 @@ const PluginComponent = (props: { plugin: PluginInterface }) => {
   };
 
   return (
-    <>
-      <div className={styles.menu_option}>
-        <div className={styles.menu_bar}>
-          <span>{plugin.name}</span>
-          <span>Version: {plugin.version}</span>
-          <span
-            onClick={() => toogleMenu()}
-            className="material-symbols-outlined"
-          >
-            expand_more
-          </span>
-        </div>
-        <div ref={elementRef} className={styles.hidden_menu}>
-          <button>
-            <span className="material-symbols-outlined">play_arrow</span>
-          </button>
-          <button>
-            <span className="material-symbols-outlined">info</span>
-          </button>
-          <button>
-            <span className="material-symbols-outlined">settings</span>
-          </button>
-        </div>
+    <div className={styles.menu_option}>
+      <div className={styles.menu_bar}>
+        <span>{plugin.name}</span>
+        <span>
+          Version:
+          {plugin.version}
+        </span>
+        <span
+          onClick={() => toogleMenu()}
+          className="material-symbols-outlined"
+        >
+          expand_more
+        </span>
       </div>
-    </>
+      <div ref={elementRef} className={styles.hidden_menu}>
+        <button>
+          <span className="material-symbols-outlined">play_arrow</span>
+        </button>
+        <button>
+          <span className="material-symbols-outlined">info</span>
+        </button>
+        <button>
+          <span className="material-symbols-outlined">settings</span>
+        </button>
+      </div>
+    </div>
   );
-};
+}
 
 export default PluginComponent;

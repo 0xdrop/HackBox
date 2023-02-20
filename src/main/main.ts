@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint global-require: off, no-console: off, promise/always-return: off */
 
 /**
@@ -13,8 +14,10 @@ import { app, BrowserWindow, shell, ipcMain, nativeTheme } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import systeminformation from 'systeminformation';
+import ElectronStore from 'electron-store';
 import InternalsManager from '../internals/index';
 import { resolveHtmlPath } from './util';
+import { schema, SchemaType } from './schema.storage';
 
 class AppUpdater {
   constructor() {
@@ -33,6 +36,11 @@ ipcMain.on('close', async () => {
 ipcMain.on('minimize', async () => {
   BrowserWindow.getFocusedWindow()?.minimize();
 });
+
+const Store = new ElectronStore<SchemaType>(schema);
+console.info('Settings on:', Store.path);
+
+ElectronStore.initRenderer();
 
 ipcMain.on('ipc-systeminfo', async (event) => {
   const info = await systeminformation.getStaticData();
@@ -78,9 +86,8 @@ const createWindow = async () => {
     ? path.join(process.resourcesPath, 'assets')
     : path.join(__dirname, '../../assets');
 
-  const getAssetPath = (...paths: string[]): string => {
-    return path.join(RESOURCES_PATH, ...paths);
-  };
+  const getAssetPath = (...paths: string[]): string =>
+    path.join(RESOURCES_PATH, ...paths);
 
   mainWindow = new BrowserWindow({
     show: true,
@@ -88,6 +95,7 @@ const createWindow = async () => {
     height: 728,
     icon: getAssetPath('icon.png'),
     webPreferences: {
+      nodeIntegration: true,
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),

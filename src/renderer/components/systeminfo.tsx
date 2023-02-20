@@ -7,9 +7,7 @@ export default function SystemInfo() {
 
   window.electron.ipcRenderer.on(
     'ipc-systeminfo',
-    (args: Systeminformation.StaticData) => {
-      return setsysdata(args);
-    }
+    (args: Systeminformation.StaticData) => setsysdata(args)
   );
 
   useEffect(() => {
@@ -17,7 +15,7 @@ export default function SystemInfo() {
   }, []);
 
   return (
-    <>
+    <div>
       {sysdata ? (
         <div className={styles.container_card}>
           <h2>System Info</h2>
@@ -38,6 +36,6 @@ export default function SystemInfo() {
           <p>Could Not load System Info</p>
         </div>
       )}
-    </>
+    </div>
   );
 }

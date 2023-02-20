@@ -42,8 +42,13 @@
 }
 
 @keyframes slideaway {
-  from { display: block; }
-  to { transform: translateY(30px); opacity: 0;}
+  from {
+    display: block;
+  }
+  to {
+    transform: translateY(30px);
+    opacity: 0;
+  }
 }
 
 .hidden_menu {
@@ -53,7 +58,7 @@
   border-bottom-right-radius: 0;
   background: #161b22;
   height: 50px;
-  transition: all .5s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .hidden_menu button {

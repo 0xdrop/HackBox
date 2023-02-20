@@ -7,7 +7,7 @@ function formatBytes(a: number, b = 2) {
   const c = b < 0 ? 0 : b;
   const d = Math.floor(Math.log(a) / Math.log(1024));
   // eslint-disable-next-line no-restricted-properties
-  return `${parseFloat((a / Math.pow(1024, d)).toFixed(c))} ${
+  return `${parseFloat((a / 1024 ** d).toFixed(c))} ${
     ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'][d]
   }`;
 }
@@ -18,9 +18,7 @@ export default function SystemStatus() {
 
   window.electron.ipcRenderer.on(
     'ipc-systeminfo-dynamic',
-    (args: Systeminformation.DynamicData) => {
-      return setdynamicsysdata(args);
-    }
+    (args: Systeminformation.DynamicData) => setdynamicsysdata(args)
   );
 
   useEffect(() => {
@@ -30,7 +28,7 @@ export default function SystemStatus() {
   }, []);
 
   return (
-    <>
+    <div>
       {dynamicsysdata ? (
         <div className={styles.container_card}>
           <h2>System Status</h2>
@@ -51,6 +49,6 @@ export default function SystemStatus() {
           <p>Could Not load System Status</p>
         </div>
       )}
-    </>
+    </div>
   );
 }
