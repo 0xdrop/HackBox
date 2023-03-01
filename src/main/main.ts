@@ -10,7 +10,14 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain, nativeTheme } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  shell,
+  ipcMain,
+  nativeTheme,
+  screen,
+} from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import systeminformation from 'systeminformation';
@@ -38,9 +45,13 @@ ipcMain.on('minimize', async () => {
 });
 
 const Store = new ElectronStore<SchemaType>(schema);
-console.info('Settings on:', Store.path);
 
-ElectronStore.initRenderer();
+ipcMain.on('electron-store-get', async (event, val) => {
+  event.returnValue = Store.get(val);
+});
+ipcMain.on('electron-store-set', async (event, key, val) => {
+  Store.set(key, val);
+});
 
 ipcMain.on('ipc-systeminfo', async (event) => {
   const info = await systeminformation.getStaticData();
@@ -78,6 +89,7 @@ const installExtensions = async () => {
 };
 
 const createWindow = async () => {
+  const factor = screen.getPrimaryDisplay().scaleFactor;
   // if (isDebug) {
   //   await installExtensions();
   // }
@@ -91,14 +103,15 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: true,
-    width: 1024,
-    height: 728,
+    width: 1024 / factor,
+    height: 768 / factor,
     icon: getAssetPath('icon.png'),
     webPreferences: {
       nodeIntegration: true,
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),
+      zoomFactor: 1.0 / factor,
     },
     transparent: true,
     frame: false,

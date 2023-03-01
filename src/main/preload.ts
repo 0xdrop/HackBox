@@ -29,6 +29,14 @@ const electronHandler = {
       ipcRenderer.send('minimize');
     },
   },
+  store: {
+    get(key: any): any {
+      return ipcRenderer.sendSync('electron-store-get', key);
+    },
+    set(property: any, val: any): void {
+      ipcRenderer.send('electron-store-set', property, val);
+    },
+  },
 };
 
 contextBridge.exposeInMainWorld('electron', electronHandler);
