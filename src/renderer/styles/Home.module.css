@@ -4,7 +4,8 @@
 .menu {
   padding: 10px;
   background-color: #161b22;
-  border-right-color: #000;
+  border: #000 thick 10px;
+  border-radius: 5px;
   border-right: 1px;
 }
 
@@ -23,11 +24,14 @@
 }
 
 .icon {
-  border-bottom: 10px;
-  border-bottom-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+.icon p {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 15px;
 }
 
 .flexbox {
@@ -83,11 +87,14 @@
   padding: 20px;
   font-family: 'Montserrat';
   font-size: 15px;
-  /* width: 40px; */
-  /* height: 20px; */
   text-align: center;
   background-color: transparent;
   border: transparent;
+  align-items: center
+}
+.menu_option button p {
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
 }
 .menu_option button link {
   color: black;
@@ -102,6 +109,7 @@
   flex-direction: row;
   justify-content: left;
   min-height: 100vh;
+  padding: 10px;
 }
 
 .description {

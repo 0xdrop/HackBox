@@ -39,12 +39,15 @@ export default function Home() {
                   width="64"
                   height="64"
                 />
+                <br />
+                <p>{user?.data.login}</p>
               </Link>
               <hr className={styles.divider} />
               <div className={styles.menu_options}>
                 <Link to="/" className={styles.menu_option}>
                   <button>
                     <span className="material-symbols-outlined">home</span>
+                    <p>Home</p>
                   </button>
                 </Link>
                 <Link to="/tools" className={styles.menu_option}>
@@ -52,11 +55,13 @@ export default function Home() {
                     <span className="material-symbols-outlined">
                       home_repair_service
                     </span>
+                    <p>Lists</p>
                   </button>
                 </Link>
                 <Link className={styles.menu_option} to="/settings">
                   <button>
                     <span className="material-symbols-outlined">settings</span>
+                    <p>Settings</p>
                   </button>
                 </Link>
               </div>
@@ -70,7 +75,7 @@ export default function Home() {
               </button>
             </div>
             <div className={styles.container}>
-              <Routes>
+              <Routes location="/">
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/tools" element={<Tools />} />
                 <Route path="/settings" />
