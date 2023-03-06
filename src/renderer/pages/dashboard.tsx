@@ -1,5 +1,4 @@
 import styles from '@Styles/Home.module.css';
-import SystemStatus from '@Components/systemstatus';
 import SystemInfo from '@Components/systeminfo';
 
 export default function Dashboard() {
@@ -29,7 +28,6 @@ export default function Dashboard() {
         </div>
       </div>
       <div className={styles.flexbox}>
-        <SystemStatus />
         <SystemInfo />
       </div>
     </>

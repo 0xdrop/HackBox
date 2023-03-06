@@ -34,8 +34,7 @@ export default function SystemStatus() {
           <h2>System Status</h2>
           <hr className={styles.divider} />
           <p>
-            TODO: fix dynamic info
-            <br /> {dynamicsysdata.cpuCurrentSpeed.avg} GHz /{' '}
+            {dynamicsysdata.cpuCurrentSpeed.avg} GHz /{' '}
             {dynamicsysdata.cpuCurrentSpeed.max} GHz{' '}
             {dynamicsysdata.cpuTemperature?.main} <br />{' '}
             {formatBytes(dynamicsysdata.mem.used)} /{' '}

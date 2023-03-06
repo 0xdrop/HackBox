@@ -3,7 +3,13 @@ import styles from '@Styles/Home.module.css';
 import Dashboard from '@Pages/dashboard';
 import Tools from '@Pages/tools';
 import FirstRun from '@Pages/FirstRun';
-import { Routes, Route, BrowserRouter as Router, Link } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  BrowserRouter as Router,
+  Link,
+  Navigate,
+} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { GetResponseTypeFromEndpointMethod } from '@octokit/types';
 import { Octokit } from '@octokit/rest';
@@ -31,6 +37,9 @@ export default function Home() {
       ) : (
         <Router>
           <main className={styles.main}>
+            <button className={styles.button_fixed}>
+              <span className="material-symbols-outlined">add</span>
+            </button>
             <div className={styles.menu}>
               <Link to="/" className={styles.icon}>
                 <img
@@ -74,11 +83,12 @@ export default function Home() {
                 <span className="material-symbols-outlined">close</span>
               </button>
             </div>
+            <Navigate to="/" />
             <div className={styles.container}>
-              <Routes location="/">
-                <Route path="/" element={<Dashboard />} />
+              <Routes>
+                <Route index path="/" element={<Dashboard />} />
                 <Route path="/tools" element={<Tools />} />
-                <Route path="/settings" />
+                <Route path="/settings" element={<Tools />} />
               </Routes>
             </div>
           </main>
