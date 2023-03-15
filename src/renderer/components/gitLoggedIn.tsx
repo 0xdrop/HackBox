@@ -2,39 +2,38 @@ import styles from '@Styles/Home.module.css';
 import React, { useEffect, useState } from 'react';
 import ReactModal from 'react-modal';
 
-// const { request } = require('@octokit/request');
-// const { createOAuthDeviceAuth } = require('@octokit/auth-oauth-device');
+const { request } = require('@octokit/request');
+const { createOAuthDeviceAuth } = require('@octokit/auth-oauth-device');
 
 export default function GitLoggedIn() {
-  const [loggedIn, setloggedIn] = useState<boolean>(false);
   const [modal, setModal] = useState<boolean>(false);
-  // const [useracess, setUserAcess] = useState<string>('');
+  const [useracess, setUserAcess] = useState<string>('');
 
   useEffect(() => {
-    if (!window.electron.store.get('loggedIn')) {
-      setloggedIn(false);
+    if (window.electron.store.get('useracess')) {
+      setUserAcess(JSON.stringify(window.electron.store.get('useracess')));
     } else {
-      setloggedIn(true);
+      setUserAcess('');
     }
   }, []);
 
   async function getAuth() {
-    // const auth = createOAuthDeviceAuth({
-    //   clientType: 'oauth-app',
-    //   clientId: 'cbba1b848ee1f10b913d',
-    //   scopes: ['repo'],
-    //   request: request.defaults({
-    //     baseUrl: 'https://cors-anywhere.herokuapp.com/https://github.com',
-    //   }),
-    //   onVerification(verification: { verification_uri: any; user_code: any }) {
-    //     console.log('Open %s', verification.verification_uri);
-    //     console.log('Enter code: %s', verification.user_code);
-    //   },
-    // });
-    // const tokenAuthentication = await auth({
-    //   type: 'oauth',
-    // });
-    // console.log(tokenAuthentication);
+    const auth = createOAuthDeviceAuth({
+      clientType: 'oauth-app',
+      clientId: 'cbba1b848ee1f10b913d',
+      scopes: ['repo'],
+      request: request.defaults({
+        baseUrl: 'https://cors-anywhere.herokuapp.com/https://github.com',
+      }),
+      onVerification(verification: { verification_uri: any; user_code: any }) {
+        console.log('Open %s', verification.verification_uri);
+        console.log('Enter code: %s', verification.user_code);
+      },
+    });
+    const tokenAuthentication = await auth({
+      type: 'oauth',
+    });
+    console.log(tokenAuthentication);
   }
 
   return (
@@ -45,7 +44,7 @@ export default function GitLoggedIn() {
         </div>
       </ReactModal>
       <div className={styles.container_card}>
-        {loggedIn ? (
+        {useracess ? (
           <div>
             <div>Rights permited</div>
             <div>Logoff?</div>

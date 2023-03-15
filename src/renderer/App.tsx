@@ -3,13 +3,7 @@ import styles from '@Styles/Home.module.css';
 import Dashboard from '@Pages/dashboard';
 import Tools from '@Pages/tools';
 import FirstRun from '@Pages/FirstRun';
-import {
-  Routes,
-  Route,
-  BrowserRouter as Router,
-  Link,
-  Navigate,
-} from 'react-router-dom';
+import { Routes, Route, BrowserRouter as Router, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { GetResponseTypeFromEndpointMethod } from '@octokit/types';
 import { Octokit } from '@octokit/rest';
