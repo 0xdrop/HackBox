@@ -22,11 +22,11 @@ export default function Home() {
       GetResponseTypeFromEndpointMethod<typeof octokit.rest.users.getByUsername>
     >();
   useEffect(() => {
-    if (!window.electron.store.get('initialized')) {
-      setInitial(true);
-    } else {
+    if (window.electron.store.get('initialized')) {
       setUser(JSON.parse(window.electron.store.get('user')));
       setInitial(false);
+    } else {
+      setInitial(true);
     }
   }, []);
 
@@ -83,7 +83,7 @@ export default function Home() {
                 <span className="material-symbols-outlined">close</span>
               </button>
             </div>
-            <Navigate to="/" />
+
             <div className={styles.container}>
               <Routes>
                 <Route index path="/" element={<Dashboard />} />
