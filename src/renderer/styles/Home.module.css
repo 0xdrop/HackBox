@@ -412,11 +412,15 @@
   transform: scale(1.15);
 }
 
-.modal_root {
-  width: 100%;
-  height: 100%;
+.modal_overlay {
+  background-color: transparent;
+  width: 100px;
+  height: 100px;
 }
 
 .modal_main {
-  background-color: #000;
+  width: 400px;
+  height: 300px;
+  background-color: tan;
+  border-radius: 10px;
 }

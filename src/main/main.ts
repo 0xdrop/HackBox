@@ -58,6 +58,11 @@ ipcMain.on('ipc-systeminfo', async (event) => {
   return event.reply('ipc-systeminfo', info);
 });
 
+ipcMain.on('ipc-openurl', async (event, url) => {
+  shell.openExternal(url);
+  return event.reply('Opened Tab', url);
+});
+
 ipcMain.on('ipc-systeminfo-dynamic', async (event) => {
   const info = await systeminformation.getDynamicData();
   return event.reply('ipc-systeminfo-dynamic', info);
